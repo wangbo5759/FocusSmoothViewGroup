@@ -1,0 +1,50 @@
+问题1
+build工程出现：
+gen already exists but is not a source folder. Convert to a source folder or rename it.
+
+解决方法：
+
+1. 右键点击工程，选择 "Properties"
+2. 选择左边的 "Java Build Path" 
+3. 打开 "Source" 标签面板
+4. 点击 "Add Folder..."
+5. 勾选 "gen" 文件夹，点击OK，点击YES，再点击OK//讲其作为source folder加到工程中
+6. 最后右键点击工程，选择 "Andriod Tools" 里面的 "Fix Project Properties" //可选
+
+问题2：
+工程中的R文件的引用报错
+
+一般的情况都是gen目录下没有生成R.java等文件
+
+1 右键gen/-- build path -- remove from build path  //此时系统会自动新建一个gen的folder
+
+知识1 
+
+工程可以编译成为lib中的jar包提供给其他工程
+
+方法：
+1 工程右键 properties
+2 Android选项中，选中Is Library 这样编译出的bin/下即为jar文件
+
+3 引用方法：要引用的工程 右键properties Android选项 Library 中选择对应变为lib的jar包
+
+知识2
+
+两种方式连接手机，监听手机：
+adb connect 192.168.1.5:5555    (:5555可省略） 需要电脑和android设备在同一个局域网内
+adb disconnect 192.168.1.5:5555 同理，可以断开连接
+
+enable adb over wifi:
+
+Code:
+setprop service.adb.tcp.port 5555
+stop adbd
+start adbd
+
+and to disable it:
+
+setprop service.adb.tcp.port -1
+stop adbd
+start adbd //小于等于-1的是通过usb来监听的
+
+2 按照问题1的解决步骤重新将gen的folder加到工程中
